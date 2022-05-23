@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		nav {
+			padding: 2% 6%;
+			background: #007391;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		nav ul li{
+			list-style: none;
+			
+		}
+		.container {
+			margin: 8% 8%;
+		}
+		.container ol {
+			margin: 2% 8%;
+		}
+		.container ul {
+			margin: 2% 8%;
+		}
+		hr {
+			background: #007391;
+		}
+		@media(max-width:750){
+			nav{
+				padding: 10% 1%;
+			}
+		}
+	</style>
+</head>
+<body>
+	<nav>
+		<h4>Developer: codewitgabi</h4>
+		<ul>
+			<li>
+				<form action="" method="post">
+					{% csrf_token %}
+					<input type="text" name="word" placeholder="Search word here">
+					<input type="submit" value="Search">
+				</form>
+			</li>
+		</ul>
+	</nav>
+	<div class="container">
+		<h3>{{ word }}</h3><br>
+		<hr><hr>
+
+        {% for key, value in meanings.items %}
+            <h3>{{ key }}</h3>
+            <ol>
+                {% for meaning in value %}
+                    <li>{{ meaning }}</li>
+                {% endfor %}
+            </ol>
+			<br>
+        {% endfor %}
+
+		{% if synonyms %}
+		<h3>Synonym</h3>
+		{% for synonym in synonyms %}
+			<ul>
+				<li>{{ synonym }}</li>
+			</ul>
+		{% endfor %}
+		{% endif %}
+		<br>
+		
+		{% if antonyms %}
+		<h3>Antonym</h3>
+		{% for antonym in antonyms %}
+			<ul>
+				<li>{{ antonym }}</li>
+			</ul>
+		{% endfor %}
+		{% endif %}
+
+	</div>
+</body>
+</html>
